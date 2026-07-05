@@ -1,0 +1,28 @@
+% ---------------------------------------------------------------------------
+% Centro Instantâneo de Rotação (ICR) comum.
+% Ilustra a restrição de rolamento sem escorregamento: a velocidade de cada
+% roda é perpendicular ao raio que a liga ao ICR, de modo que todo o corpo
+% gira com velocidade angular theta_dot = v / R em torno do ICR.
+% ---------------------------------------------------------------------------
+\begin{tikzpicture}[>=stealth, scale=1.2]
+  \coordinate (O) at (0,0);
+  \fill (O) circle (1.5pt) node[below left]{ICR};
+
+  \def\R{3.0}
+  \coordinate (C) at (\R,0);
+
+  % arco de trajetória
+  \draw[dashed, gray] (O) circle (\R);
+  \draw[->, thick, blue] (\R-0.02,0) arc (0:55:\R);
+
+  % raio R
+  \draw[<->] (O) -- (C) node[midway, below]{$R$};
+
+  % robô no ponto C
+  \fill (C) circle (1.5pt) node[below right]{$C$};
+  % velocidade linear v perpendicular ao raio (tangente)
+  \draw[->, thick, red] (C) -- ++(0,1.1) node[right]{$v$};
+  % velocidade angular
+  \draw[->, thick] (O) ++(35:0.8) arc (35:70:0.8);
+  \node at (52:1.15) {$\dot{\theta}=v/R$};
+\end{tikzpicture}

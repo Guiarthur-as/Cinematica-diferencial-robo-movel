@@ -1,0 +1,4 @@
+# Dependências de execução do projeto (alternativa ao uv, via pip).
+# Instale com:  pip install -r requirements.txt
+numpy>=2.5.1
+matplotlib>=3.11.0

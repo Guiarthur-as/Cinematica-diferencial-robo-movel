@@ -1,0 +1,43 @@
+% ---------------------------------------------------------------------------
+% Geometria do robô de tração diferencial.
+%   - chassi alongado, com as rodas motrizes no eixo traseiro (sobre C) e a
+%     roda boba (castor) passiva na dianteira, o que dá estabilidade sem
+%     alterar a cinemática;
+%   - bitola b entre as rodas motrizes; velocidades das rodas v_r, v_l;
+%   - referencial do corpo (x_r, y_r) na origem C e ângulo theta em relação
+%     ao referencial global.
+% ---------------------------------------------------------------------------
+\begin{tikzpicture}[>=stealth, scale=1.9]
+  % eixo global
+  \draw[->, gray] (-0.6,0) -- (3.7,0) node[right]{$X$};
+  \draw[->, gray] (0,-0.6) -- (0,2.5) node[above]{$Y$};
+
+  % corpo do robô, orientado por theta; C = ponto médio do eixo traseiro
+  \def\thetaval{22}
+  \coordinate (C) at (1.4,1.0);
+  \begin{scope}[shift={(C)}, rotate=\thetaval]
+    % chassi alongado (rodas atrás, roda boba na frente)
+    \draw[thick, fill=blue!8] (-0.3,-0.5) rectangle (1.25,0.5);
+    % rodas motrizes traseiras (eixo comum passando por C, em x=0)
+    \draw[line width=4pt] (-0.18,0.5)  -- (0.18,0.5);   % roda esquerda (+y)
+    \draw[line width=4pt] (-0.18,-0.5) -- (0.18,-0.5);  % roda direita (-y)
+    % roda boba (castor) dianteira
+    \draw[fill=gray!40] (0.98,0) circle (0.09);
+    \node[font=\scriptsize] at (0.98,0.26) {roda boba};
+    % velocidades das rodas (para frente, ao longo de x_r)
+    \draw[->, thick, green!60!black] (0,0.5)  -- (0.65,0.5)  node[above]{$v_l$};
+    \draw[->, thick, green!60!black] (0,-0.5) -- (0.65,-0.5) node[below]{$v_r$};
+    % bitola b entre as rodas motrizes
+    \draw[<->] (-0.28,-0.5) -- (-0.28,0.5) node[midway, left]{$b$};
+    % eixos do corpo a partir de C
+    \draw[->, thick, red] (0,0) -- (0.78,0) node[above]{$x_r$};
+    \draw[->, thick, red] (0,0) -- (0,0.85) node[left]{$y_r$};
+    % ponto de referência (meio do eixo traseiro)
+    \fill (0,0) circle (1.3pt) node[below left]{$C$};
+  \end{scope}
+
+  % ângulo theta entre a horizontal (paralela a X) por C e o eixo x_r
+  \draw[dashed, gray] (C) -- ++(1.15,0);
+  \draw[->] (C) ++(0.85,0) arc (0:\thetaval:0.85);
+  \node at ($(C)+(1.02,0.2)$) {$\theta$};
+\end{tikzpicture}

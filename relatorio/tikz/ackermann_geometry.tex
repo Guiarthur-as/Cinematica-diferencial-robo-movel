@@ -1,0 +1,47 @@
+% ---------------------------------------------------------------------------
+% Geometria da direção de Ackermann.
+%   - distância entre eixos L, bitola d;
+%   - rodas traseiras fixas, rodas dianteiras esterçadas (interna/externa);
+%   - centro instantâneo de rotação (ICR) e raio R do eixo traseiro;
+%   - ângulo phi do modelo bicicleta (roda dianteira virtual central).
+% ---------------------------------------------------------------------------
+\begin{tikzpicture}[>=stealth, scale=1.1]
+  % ICR
+  \coordinate (O) at (0,0);
+  \fill (O) circle (1.5pt) node[left]{ICR};
+
+  % eixo traseiro (a uma distância R do ICR)
+  \def\R{3.2}
+  \def\L{2.2}
+  \def\d{1.4}
+  \coordinate (RL) at (\R,0);            % roda traseira esquerda (interna)
+  \coordinate (RR) at (\R+\d,0);         % roda traseira direita (externa)
+  \coordinate (RC) at (\R+0.5*\d,0);     % centro eixo traseiro
+  \coordinate (FC) at (\R+0.5*\d,\L);    % centro eixo dianteiro
+
+  % chassi
+  \draw[thick, fill=blue!6] (RL) -- (RR) -- ($(RR)+(0,\L)$) -- ($(RL)+(0,\L)$) -- cycle;
+
+  % rodas traseiras (fixas)
+  \draw[line width=4pt] ($(RL)+(0,-0.25)$) -- ($(RL)+(0,0.25)$);
+  \draw[line width=4pt] ($(RR)+(0,-0.25)$) -- ($(RR)+(0,0.25)$);
+
+  % raios do ICR até cada roda dianteira
+  \draw[dashed, gray] (O) -- ($(RL)+(0,\L)$);
+  \draw[dashed, gray] (O) -- ($(RR)+(0,\L)$);
+  \draw[dashed] (O) -- (RC);
+  \draw[dashed] (O) -- (FC);
+
+  % rodas dianteiras esterçadas (perpendiculares ao raio)
+  \draw[line width=4pt, red]  ($(RL)+(0,\L)$) ++(-28:-0.25) -- ++(-28:0.5);  % interna
+  \draw[line width=4pt, red]  ($(RR)+(0,\L)$) ++(-20:-0.25) -- ++(-20:0.5);  % externa
+
+  % rótulos de dimensões
+  \draw[<->] ($(RL)+(-0.4,0)$) -- ($(RL)+(-0.4,\L)$) node[midway,left]{$L$};
+  \draw[<->] (RL) ++(0,-0.6) -- ($(RR)+(0,-0.6)$) node[midway,below]{$d$};
+  \draw[<->] (O) ++(0,0.15) -- ($(RC)+(0,0.15)$) node[midway,above]{$R$};
+
+  % angulos
+  \node[red] at ($(RL)+(0.55,\L+0.35)$) {$\phi_i$};
+  \node[red] at ($(RR)+(0.55,\L+0.35)$) {$\phi_o$};
+\end{tikzpicture}
