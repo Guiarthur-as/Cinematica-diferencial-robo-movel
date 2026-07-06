@@ -4,6 +4,8 @@
   <img src="outputs/animations/hero_banner.gif" width="80%" alt="Robô móvel seguindo um trajeto sinuoso">
 </p>
 
+## [Vídeo explicativo](https://youtu.be/haMk88B10ig)
+
 Modelagem, simulação e análise da **cinemática diferencial** de dois robôs móveis
 clássicos:
 
